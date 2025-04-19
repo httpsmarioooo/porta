@@ -1,0 +1,290 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Onest", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.btn-mute {
+  cursor: pointer;
+  padding-top: 50px;
+}
+
+/* Video de fondo */
+.back-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  mix-blend-mode: overlay;
+}
+
+/* Contenedor de imágenes */
+.container-images {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las imágenes salten a otra línea si no caben */
+  justify-content: center;
+  gap: 0px;
+  margin-top: 200px;
+  perspective: 1000px; /* Para dar sensación de profundidad */
+}
+
+/* Imágenes dentro del contenedor */
+.container-images img {
+  max-width: 100%;
+  height: auto;
+  animation: flotandoEspacial 6s ease-in-out infinite alternate;
+}
+
+.image-box {
+  position: relative;
+  margin-left: -100px; /* Superpone las imágenes ajustando el margen izquierdo */
+  display: inline-block;
+}
+
+.image-box img {
+  width: 300px; /*Tamaño de la img */
+  transition: transform 0.3s ease;
+}
+
+.btn-cv {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff0066;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-cv:hover {
+  background-color: #e296b4;
+}
+
+/* Estilos para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container-images {
+    flex-wrap: wrap; /* Permite que las imágenes salten a otra línea */
+    justify-content: center; /* Centra las imágenes */
+    margin-top: 150px; /* Ajusta el margen superior */
+    gap: 10px; /* Agrega un pequeño espacio entre las imágenes */
+  }
+
+  .image-box {
+    margin-left: -50px; /* Superposición horizontal más ligera */
+    margin-bottom: 15px; /* Espacio entre filas */
+  }
+
+  .image-box img {
+    width: 380px; /* Ajusta el tamaño de las imágenes para tablets */
+  }
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .container-images {
+    flex-wrap: wrap; /* Permite que las imágenes salten a otra línea */
+    justify-content: center; /* Centra las imágenes */
+    margin-top: 100px; /* Ajusta el margen superior */
+  }
+
+  .image-box {
+    margin-left: 0; /* Elimina la superposición horizontal */
+    margin-bottom: 20px; /* Agrega espacio entre las imágenes */
+  }
+
+  .image-box img {
+    width: 150px; /* Reduce el tamaño de las imágenes */
+  }
+}
+
+.caption {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 9px;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+}
+
+.image-box:hover .caption {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+@keyframes flotandoEspacial {
+  0% {
+    transform: translate(0px, 0px) rotate(-3deg);
+  }
+  25% {
+    transform: translate(5px, -10px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-5px, 5px) rotate(-4deg);
+  }
+  75% {
+    transform: translate(10px, -5px) rotate(2deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(3deg);
+  }
+}
+
+.info-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.gradiant-title {
+  background: linear-gradient(135deg, #ff0066, #e296b4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.info-card.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.card-content {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid #ffffff22;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  height: auto;
+  width: 360px;
+  animation: fadeInUp 0.5s ease;
+}
+
+.card-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+.card-list-item {
+  display: flex;
+  flex-direction: column; /* Cambia a columna para que el enlace esté arriba y las etiquetas abajo */
+  align-items: flex-start; /* Alinea el contenido a la izquierda */
+  margin-bottom: 15px;
+}
+
+.card-link {
+  color: #ff0066;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+  margin-bottom: 5px; /* Espacio entre el enlace y las etiquetas */
+}
+
+.card-link:hover {
+  color: #e296b4;
+  text-decoration: underline;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las etiquetas salten de línea si son muchas */
+  gap: 5px;
+}
+
+.card-tag {
+  background-color: #ff0066;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+p#cardText {
+  padding-top: 20px;
+}
+
+/* .card-content {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #ffffff22;
+    color: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    height: auto;
+    width: 380px;
+    animation: fadeInUp 0.5s ease;
+  } */
+
+.card-content button {
+  margin-top: 2rem;
+  background: #ff0066;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+/* Footer */
+.footer-main {
+  margin-top: auto;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.gradiant-foot {
+  color: #ffffff;
+}
+
+.gradiant-foot:hover {
+  cursor: pointer;
+  text-shadow: 0 0 1px #ffffff, 0 0 5px #ffffff, 0 0 10px #ffffff,
+    0 0 15px #ffffff, 0 0 20px #ffffff;
+}
